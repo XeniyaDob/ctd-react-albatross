@@ -6,6 +6,8 @@ const App = () => {
   //create a new state variable named newTodo with update function named setNewTodo
   //useState hook
   const [newTodo, setNewTodo] = React.useState("");
+  console.log(`I am a setNewToDo ${setNewTodo}`);
+  console.log(`I am a newToDo ${newTodo}`);
   return (
     <div>
       <header>

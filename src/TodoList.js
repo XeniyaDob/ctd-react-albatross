@@ -13,7 +13,7 @@ const TodoList = () => {
       {todoList.map((todo) => (
         //Pass key as a prop equal to the id of the todo object
         //Pass todo as a prop
-        <TodoListItem key={todo.id} todo={todo} />
+        <TodoListItem key={todo.id.toString()} todo={todo} />
       ))}
     </ul>
   );
