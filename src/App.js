@@ -1,13 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
 
 const App = () => {
-  //create a new state variable named newTodo with update function named setNewTodo
-  //useState hook
-  const [newTodo, setNewTodo] = React.useState("");
-  console.log(`I am a setNewToDo ${setNewTodo}`);
-  console.log(`I am a newToDo ${newTodo}`);
+  const [newTodo, setNewTodo] = useState("");
+  const [todoList, setTodoList] = useState([]);
   return (
     <div>
       <header>
@@ -17,7 +14,7 @@ const App = () => {
       <AddTodoForm onAddTodo={setNewTodo} />
       {/* add a paragraph element that displays the value of newTodo variable */}
       <p> New to do: {newTodo}</p>
-      <TodoList />
+      <TodoList todoList={todoList} />
     </div>
   );
 };
