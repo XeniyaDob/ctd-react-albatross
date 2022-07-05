@@ -3,17 +3,19 @@ import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
 
 const App = () => {
-  const [newTodo, setNewTodo] = useState("");
   const [todoList, setTodoList] = useState([]);
+  const addTodo = (newTodo) => {
+    setTodoList([...todoList, newTodo]);
+  };
+
   return (
     <div>
       <header>
         <h1>Todo list</h1>
       </header>
-      {/* Pass setNewTodo as a callback handler prop named onAddTodo to the AddTodoForm component */}
-      <AddTodoForm onAddTodo={setNewTodo} />
-      {/* add a paragraph element that displays the value of newTodo variable */}
-      <p> New to do: {newTodo}</p>
+
+      <AddTodoForm onAddTodo={addTodo} />
+
       <TodoList todoList={todoList} />
     </div>
   );
