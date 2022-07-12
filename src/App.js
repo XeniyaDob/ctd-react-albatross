@@ -20,7 +20,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <>
       <header>
         <h1>Todo list</h1>
       </header>
@@ -28,7 +28,7 @@ const App = () => {
       <AddTodoForm onAddTodo={addTodo} />
 
       <TodoList todoList={todoList} />
-    </div>
+    </>
   );
 };
 
