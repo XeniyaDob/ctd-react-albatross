@@ -2,16 +2,16 @@ import React from "react";
 
 const InputWithLabel = ({
   id,
-  label,
   value,
   type = "text",
   onChange,
   name,
   placeholder,
+  children,
 }) => {
   return (
     <>
-      <label htmlFor={id}>{label} </label>
+      <label htmlFor={id}>{children} </label>
       <input
         id={id}
         type={type}

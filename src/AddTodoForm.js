@@ -19,12 +19,13 @@ const AddTodoForm = ({ onAddTodo }) => {
     <form onSubmit={handleAddTodo}>
       <InputWithLabel
         id="todoTitle"
-        label="Title:"
         value={todoTitle}
         onChange={handleTitleChange}
         name="title"
         placeholder="What to do?"
-      />
+      >
+        <strong>Title:</strong>
+      </InputWithLabel>
       <button type="submit">Add</button>
     </form>
   );
