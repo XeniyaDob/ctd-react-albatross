@@ -1,9 +1,27 @@
 import React from "react";
 
-// Add props as a parameter in the TodoListItem function
-const TodoListItem = ({ todo }) => {
-  // Update the todo object reference to come from props
-  return <li>{todo.title}</li>;
+const TodoListItem = ({ todo, onRemoveTodo, onComplete }) => {
+  return (
+    <>
+      <li>
+        <span
+          style={{
+            textDecoration: todo.isComplete ? "line-through" : "none",
+          }}
+        >
+          {todo.title}
+        </span>
+        <span>
+          <button type="button" onClick={() => onComplete(todo.id)}>
+            {todo.isComplete ? "Undo" : "Done"}
+          </button>
+          <button type="button" onClick={() => onRemoveTodo(todo.id)}>
+            Remove
+          </button>
+        </span>
+      </li>
+    </>
+  );
 };
 
 export default TodoListItem;

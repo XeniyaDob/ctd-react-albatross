@@ -15,8 +15,32 @@ const useSemiPersistentState = () => {
 
 const App = () => {
   const [todoList, setTodoList] = useSemiPersistentState();
+
   const addTodo = (newTodo) => {
     setTodoList([...todoList, newTodo]);
+  };
+
+  const handleToggleComplete = (id) => {
+    console.log(id);
+    const newTodoList = todoList.map((todo) => {
+      if (todo.id === id) {
+        const updatedItem = {
+          ...todo,
+          isComplete: !todo.isComplete,
+        };
+
+        return updatedItem;
+      }
+
+      return todo;
+    });
+
+    setTodoList(newTodoList);
+  };
+
+  const handleRemoveTodo = (id) => {
+    const newTodoList = todoList.filter((todo) => todo.id !== id);
+    setTodoList(newTodoList);
   };
 
   return (
@@ -27,7 +51,11 @@ const App = () => {
 
       <AddTodoForm onAddTodo={addTodo} />
 
-      <TodoList todoList={todoList} />
+      <TodoList
+        todoList={todoList}
+        onRemoveTodo={handleRemoveTodo}
+        onComplete={handleToggleComplete}
+      />
     </>
   );
 };
