@@ -4,16 +4,19 @@ import TodoList from "./TodoList";
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
+  const[isLoading,setIsLoading ]=useState(true)
 
   React.useEffect(()=>{
     new Promise((resolve,reject)=>
     setTimeout(
       ()=>resolve({data:{todoList:JSON.parse(localStorage.getItem("savedTodoList"))}}),
       2000)).then((result)=>{setTodoList(result.data.todoList)})
+      setIsLoading(false)
   },[])
 
   React.useEffect(() => {
-    localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    if(!isLoading){localStorage.setItem("savedTodoList", JSON.stringify(todoList));}
+    
   }, [todoList]);
 
 
