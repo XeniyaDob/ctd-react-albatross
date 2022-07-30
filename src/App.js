@@ -6,18 +6,24 @@ const App = () => {
   const [todoList, setTodoList] = useState([]);
   const[isLoading,setIsLoading ]=useState(true)
 
-  React.useEffect(()=>{
-    new Promise((resolve,reject)=>
-    setTimeout(
-      ()=>resolve({data:{todoList:JSON.parse(localStorage.getItem("savedTodoList"))}}),
-      2000)).then((result)=>{setTodoList(result.data.todoList)})
-      setIsLoading(false)
-  },[])
+  React.useEffect(() => {
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({
+          data: { todoList: JSON.parse(localStorage.getItem("savedTodoList")) }
+        });
+      }, 2000);
+    }).then((result) => {
+      setTodoList(result.data.todoList);
+      setIsLoading(false);
+    });
+  }, []);
 
   React.useEffect(() => {
-    if(!isLoading){localStorage.setItem("savedTodoList", JSON.stringify(todoList));}
-    
-  }, [todoList]);
+    if(!isLoading){
+      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    }
+   }, [isLoading,todoList]);
 
 
   const addTodo = (newTodo) => {
@@ -55,11 +61,16 @@ const App = () => {
 
       <AddTodoForm onAddTodo={addTodo} />
 
-      <TodoList
+      {isLoading ? (
+        <p>Loading...</p>
+        ):(
+        <TodoList
         todoList={todoList}
         onRemoveTodo={handleRemoveTodo}
         onComplete={handleToggleComplete}
       />
+      )}
+      
     </>
   );
 };
