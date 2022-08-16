@@ -2,21 +2,34 @@ import React, { useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
 
-const App = () => {
+const App = () => {  
   const [todoList, setTodoList] = useState([]);
   const[isLoading,setIsLoading ]=useState(true)
 
+// url is a global variable that can be called at any time within the component
+const url = `https://api.airtable.com/v0/${process.env.REACT_APP_AIRTABLE_BASE_ID}/Default`;
+
   React.useEffect(() => {
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({
-          data: { todoList: JSON.parse(localStorage.getItem("savedTodoList")) }
-        });
-      }, 2000);
-    }).then((result) => {
-      setTodoList(result.data.todoList);
-      setIsLoading(false);
-    });
+    //starts the fetching, which is the endpoint
+    fetch(url,
+    {
+      headers:{
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+      }
+    })
+    //fetch is asynchronous and will be returning a Promise by .then()
+    //API sends the data in text format and to use it we need to convert back into an Object
+    .then(response=>response.json())
+    .then(data=>{
+      console.log("**********",data.records)
+      //The data is the argument we passed in line 21 for the then method.
+      //“records” is the data coming from the API
+      //Update the setToDoList
+      setTodoList(data.records)
+      setIsLoading(false)
+    })
+    .catch(error=>console.error(error))
+    
   }, []);
 
   React.useEffect(() => {
@@ -26,8 +39,27 @@ const App = () => {
    }, [isLoading,todoList]);
 
 
+     //first thing to do is declaring the function that will create the new todo
   const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
+    fetch(url, {
+      method: "POST",
+      //Content-Type: application/json. Indicates that the request body format is JSON.
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        "Content-type": "application/json"
+      },
+      //JSON.stringify() which has the functionality of converting the object we are sending to the API to JSON
+      //After converting to JSON, handleAddTodo in AddToDoForm.js component line 9
+      body: JSON.stringify(newTodo)
+    })
+      .then((response) => response.json())
+      //we are fetching the data with the GET method again. That means the page will be re-render the new todo once the addTodo() function is trigged.
+      .then((data) => {
+        setTodoList([...todoList, data]);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   const handleToggleComplete = (id) => {
@@ -48,10 +80,19 @@ const App = () => {
     setTodoList(newTodoList);
   };
 
-  const handleRemoveTodo = (id) => {
-    const newTodoList = todoList.filter((todo) => todo.id !== id);
-    setTodoList(newTodoList);
-  };
+ //declaring the function that will remove a todo
+ const removeTodo = (id) => {
+  fetch(`${url}?records[]=${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`
+    }
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      setTodoList(todoList.filter((item) => item.id !== id));
+    });
+};
 
   return (
     <>
@@ -66,7 +107,7 @@ const App = () => {
         ):(
         <TodoList
         todoList={todoList}
-        onRemoveTodo={handleRemoveTodo}
+        onRemoveTodo={removeTodo}
         onComplete={handleToggleComplete}
       />
       )}
