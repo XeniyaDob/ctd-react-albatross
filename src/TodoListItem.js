@@ -9,7 +9,7 @@ const TodoListItem = ({ todo, onRemoveTodo, onComplete }) => {
             textDecoration: todo.isComplete ? "line-through" : "none",
           }}
         >
-          {todo.title}
+          {todo.fields.Title}
         </span>
         <span>
           <button type="button" onClick={() => onComplete(todo.id)}>
