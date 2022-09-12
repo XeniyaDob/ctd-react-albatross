@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./InputWithLabel.module.css";
 
 const InputWithLabel = ({
   id,
@@ -13,18 +14,12 @@ const InputWithLabel = ({
   React.useEffect(() => {
     inputRef.current.focus();
   });
-  //   This is the most straightforward usage of useEffect
-  //   where we only pass one argument -- a function.
-  //   This function will render on every render -- meaning
-  //   it runs on the first render of the component
-  //   (also called on mount or mounting of the component)
-  //   and on every re-render of the component
-  //   (also called on update or updating of the component).
 
   return (
     <>
       <label htmlFor={id}>{children} </label>
       <input
+        className={styles.input}
         id={id}
         type={type}
         value={value}

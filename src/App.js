@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import styles from "./App.module.css";
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
@@ -94,31 +95,33 @@ const App = () => {
 
   return (
     <Router>
-      <h1>Todo list</h1>
-      <Routes>
-        <Route
-          index
-          exact
-          path="/"
-          element={
-            <>
-              <AddTodoForm onAddTodo={addTodo} />
+      <div className={styles.container}>
+        <h1>Todo list</h1>
+        <Routes>
+          <Route
+            index
+            exact
+            path="/"
+            element={
+              <>
+                <AddTodoForm onAddTodo={addTodo} />
 
-              {isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <TodoList
-                  todoList={todoList}
-                  onRemoveTodo={removeTodo}
-                  onComplete={handleToggleComplete}
-                />
-              )}
-            </>
-          }
-        />
+                {isLoading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <TodoList
+                    todoList={todoList}
+                    onRemoveTodo={removeTodo}
+                    onComplete={handleToggleComplete}
+                  />
+                )}
+              </>
+            }
+          />
 
-        <Route path="/new" element={<h1>New Todo List</h1>} />
-      </Routes>
+          <Route path="/new" element={<h1>New Todo List</h1>} />
+        </Routes>
+      </div>
     </Router>
   );
 };
