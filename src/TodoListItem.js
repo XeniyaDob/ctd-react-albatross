@@ -7,7 +7,7 @@ import * as MdIcons from "react-icons/md";
 const TodoListItem = ({ todo, onRemoveTodo, onComplete }) => {
   return (
     <>
-      <li className={styles.ListItem}>
+      <li className={styles.ListItem} className={styles.ListItem}>
         <span
           style={{
             textDecoration: todo.isComplete ? "line-through" : "none",

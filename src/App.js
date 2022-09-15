@@ -3,7 +3,10 @@ import AddTodoForm from "./AddTodoForm";
 import TodoList from "./TodoList";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import styles from "./App.module.css";
+<<<<<<< HEAD
 import Sidebar from "./Sidebar";
+=======
+>>>>>>> 42c54d3d54e4a7961743e7440745f8cd7f66b313
 
 const App = () => {
   const [todoList, setTodoList] = useState([]);
@@ -109,23 +112,21 @@ const App = () => {
                 <>
                   <AddTodoForm onAddTodo={addTodo} />
 
-                  {isLoading ? (
-                    <p>Loading...</p>
-                  ) : (
-                    <TodoList
-                      todoList={todoList}
-                      onRemoveTodo={removeTodo}
-                      onComplete={handleToggleComplete}
-                    />
-                  )}
-                </>
-              }
-            />
+              {isLoading ? (
+                <p>Loading...</p>
+              ) : (
+                <TodoList
+                  todoList={todoList}
+                  onRemoveTodo={removeTodo}
+                  onComplete={handleToggleComplete}
+                />
+              )}
+            </>
+          }
+        />
 
-            <Route path="/new" element={<h1>New Todo List</h1>} />
-          </Routes>
-        </div>
-      </div>
+        <Route path="/new" element={<h1>New Todo List</h1>} />
+      </Routes>
     </Router>
   );
 };
