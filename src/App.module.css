@@ -1,0 +1,24 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  color: #171212;
+  background-color: rgb(235, 235, 235);
+  height: 100vh;
+  font-family: "Montserrat", sans-serif;
+}
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 2%;
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(235, 235, 235);
+}
