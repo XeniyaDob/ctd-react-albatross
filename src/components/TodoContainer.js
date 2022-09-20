@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import AddTodoForm from "./AddTodoForm.js";
 import TodoList from "./TodoList";
 import styles from "../App.module.css";
+import PropTypes from "prop-types";
 
 const TodoContainer = ({ airtableName }) => {
   const [todoList, setTodoList] = useState([]);
@@ -23,7 +24,6 @@ const TodoContainer = ({ airtableName }) => {
       //API sends the data in text format and to use it we need to convert back into an Object
       .then((response) => response.json())
       .then((data) => {
-        console.log("**********", data.records);
         //The data is the argument we passed in line 21 for the then method.
         //“records” is the data coming from the API
         //Update the setToDoList
@@ -113,6 +113,10 @@ const TodoContainer = ({ airtableName }) => {
       </div>
     </div>
   );
+};
+
+TodoContainer.propTypes = {
+  airtableName: PropTypes.string,
 };
 
 export default TodoContainer;
