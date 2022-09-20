@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import InputWithLabel from "./InputWithLabel";
+import styles from "./InputWithLabel.module.css";
 
 const AddTodoForm = ({ onAddTodo }) => {
   const [todoTitle, setTodoTitle] = useState([]);
@@ -11,12 +12,12 @@ const AddTodoForm = ({ onAddTodo }) => {
   const handleAddTodo = (event) => {
     event.preventDefault();
 
-    onAddTodo({ fields: {Title: todoTitle} });
+    onAddTodo({ fields: { Title: todoTitle } });
     setTodoTitle("");
   };
 
   return (
-    <form onSubmit={handleAddTodo}>
+    <form onSubmit={handleAddTodo} className={styles.form}>
       <InputWithLabel
         id="todoTitle"
         value={todoTitle}
@@ -24,9 +25,11 @@ const AddTodoForm = ({ onAddTodo }) => {
         name="title"
         placeholder="What to do?"
       >
-        <strong>Title:</strong>
+        {/* <strong>Title:</strong> */}
       </InputWithLabel>
-      <button type="submit">Add</button>
+      <button className={styles.inputButton} type="submit">
+        Add
+      </button>
     </form>
   );
 };
