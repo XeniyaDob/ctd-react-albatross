@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import TodoContainer from "./components/TodoContainer";
 import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
+import Header from "./components/Header";
 
 const App = () => {
   return (
     <Router>
-      <div className={styles.container}>
+      <Header />
+      <main className={styles.container}>
         <Sidebar />
         <Routes>
           <Route
@@ -51,7 +53,7 @@ const App = () => {
             }
           />
         </Routes>
-      </div>
+      </main>
     </Router>
   );
 };
