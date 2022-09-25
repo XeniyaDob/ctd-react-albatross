@@ -95,22 +95,20 @@ const TodoContainer = ({ airtableName }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.todoContainer}>
-        <h1>{airtableName} List </h1>
+    <div className={styles.todoContainer}>
+      <h1>{airtableName} List </h1>
 
-        <AddTodoForm onAddTodo={addTodo} />
+      <AddTodoForm onAddTodo={addTodo} />
 
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : (
-          <TodoList
-            todoList={todoList}
-            onRemoveTodo={removeTodo}
-            onComplete={handleToggleComplete}
-          />
-        )}
-      </div>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <TodoList
+          todoList={todoList}
+          onRemoveTodo={removeTodo}
+          onComplete={handleToggleComplete}
+        />
+      )}
     </div>
   );
 };

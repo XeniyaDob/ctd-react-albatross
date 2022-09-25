@@ -4,13 +4,15 @@ import TodoContainer from "./components/TodoContainer";
 import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <Router>
       <Header />
-      <main className={styles.container}>
+      <div className={styles.container}>
         <Sidebar />
+
         <Routes>
           <Route
             index
@@ -53,7 +55,8 @@ const App = () => {
             }
           />
         </Routes>
-      </main>
+      </div>
+      <Footer />
     </Router>
   );
 };

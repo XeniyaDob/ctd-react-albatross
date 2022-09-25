@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./Header.module.css";
+import styles from "./HeaderFooter.module.css";
 
 function Header() {
   return (
     <header className={styles.header}>
-      <button data-text="Awesome" class={styles.button}>
-        <span class={styles.actualText}>&nbsp;TodoApp&nbsp;</span>
-        <span class={styles.hoverText} aria-hidden="true">
+      <button className={styles.button}>
+        <span className={styles.actualText}>&nbsp;TodoApp&nbsp;</span>
+        <span className={styles.hoverText} aria-hidden="true">
           &nbsp;TodoApp&nbsp;
         </span>
       </button>

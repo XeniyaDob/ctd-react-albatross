@@ -1,12 +1,16 @@
 .header {
+  position: fixed;
+  left: 0;
+  top: 0;
   display: flex;
   justify-content: flex-start;
-  background-color: rgb(130, 129, 129);
+  background-color: rgb(210, 210, 210);
   padding: 30px 50px;
   text-align: center;
   font-size: 30px;
   color: white;
   font-family: "Montserrat", sans-serif;
+  width: 100%;
 }
 
 .button {
@@ -47,4 +51,19 @@
 .button:hover .hoverText {
   width: 100%;
   filter: drop-shadow(0 0 23px var(--animation-color));
+}
+
+.footer {
+  position: fixed;
+  display: flex;
+  justify-content: flex-start;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(210, 210, 210);
+  padding: 30px 50px;
+
+  color: white;
+}
+@media (max-width: 600px) {
 }
