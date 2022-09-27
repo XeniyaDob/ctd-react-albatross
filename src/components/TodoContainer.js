@@ -15,9 +15,8 @@ const TodoContainer = ({ airtableName }) => {
     fetch(
       `https://api.airtable.com/v0/${
         process.env.REACT_APP_AIRTABLE_BASE_ID
-      }/${encodeURIComponent(
-        airtableName
-      )}?&sort[0][field]=Title&sort[0][direction]=asc`,
+      }/${encodeURIComponent(airtableName)}`,
+      // ?&sort[0][field]=Title&sort[0][direction]=asc
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -28,9 +27,15 @@ const TodoContainer = ({ airtableName }) => {
       //API sends the data in text format and to use it we need to convert back into an Object
       .then((response) => response.json())
       .then((data) => {
-        //The data is the argument we passed in line 21 for the then method.
-        //“records” is the data coming from the API
-        //Update the setToDoList
+        data.records.sort((objectA, objectB) => {
+          if (objectA.fields.Title < objectB.fields.Title) {
+            return 1;
+          } else if (objectA.fields.Title === objectB.fields.Title) {
+            return 0;
+          } else {
+            return -1;
+          }
+        });
         setTodoList(data.records);
         setIsLoading(false);
       })
