@@ -9,17 +9,21 @@ const TodoContainer = ({ airtableName }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   // url is a global variable that can be called at any time within the component
-  const url = `https://api.airtable.com/v0/${
-    process.env.REACT_APP_AIRTABLE_BASE_ID
-  }/${encodeURIComponent(airtableName)}`;
 
   React.useEffect(() => {
     //starts the fetching, which is the endpoint
-    fetch(url, {
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-      },
-    })
+    fetch(
+      `https://api.airtable.com/v0/${
+        process.env.REACT_APP_AIRTABLE_BASE_ID
+      }/${encodeURIComponent(
+        airtableName
+      )}?&sort[0][field]=Title&sort[0][direction]=asc`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        },
+      }
+    )
       //fetch is asynchronous and will be returning a Promise by .then()
       //API sends the data in text format and to use it we need to convert back into an Object
       .then((response) => response.json())
@@ -41,17 +45,22 @@ const TodoContainer = ({ airtableName }) => {
 
   //first thing to do is declaring the function that will create the new todo
   const addTodo = (newTodo) => {
-    fetch(url, {
-      method: "POST",
-      //Content-Type: application/json. Indicates that the request body format is JSON.
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-        "Content-type": "application/json",
-      },
-      //JSON.stringify() which has the functionality of converting the object we are sending to the API to JSON
-      //After converting to JSON, handleAddTodo in AddToDoForm.js component line 9
-      body: JSON.stringify(newTodo),
-    })
+    fetch(
+      `https://api.airtable.com/v0/${
+        process.env.REACT_APP_AIRTABLE_BASE_ID
+      }/${encodeURIComponent(airtableName)}`,
+      {
+        method: "POST",
+        //Content-Type: application/json. Indicates that the request body format is JSON.
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+          "Content-type": "application/json",
+        },
+        //JSON.stringify() which has the functionality of converting the object we are sending to the API to JSON
+        //After converting to JSON, handleAddTodo in AddToDoForm.js component line 9
+        body: JSON.stringify(newTodo),
+      }
+    )
       .then((response) => response.json())
       //we are fetching the data with the GET method again. That means the page will be re-render the new todo once the addTodo() function is trigged.
       .then((data) => {
@@ -82,12 +91,17 @@ const TodoContainer = ({ airtableName }) => {
 
   //declaring the function that will remove a todo
   const removeTodo = (id) => {
-    fetch(`${url}?records[]=${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
-      },
-    })
+    fetch(
+      `https://api.airtable.com/v0/${
+        process.env.REACT_APP_AIRTABLE_BASE_ID
+      }/${encodeURIComponent(airtableName)}?records[]=${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         setTodoList(todoList.filter((item) => item.id !== id));
