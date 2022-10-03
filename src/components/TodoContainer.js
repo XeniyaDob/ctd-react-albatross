@@ -8,15 +8,13 @@ const TodoContainer = ({ airtableName }) => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // url is a global variable that can be called at any time within the component
-
   React.useEffect(() => {
     //starts the fetching, which is the endpoint
     fetch(
       `https://api.airtable.com/v0/${
         process.env.REACT_APP_AIRTABLE_BASE_ID
       }/${encodeURIComponent(airtableName)}`,
-      // ?&sort[0][field]=Title&sort[0][direction]=asc
+
       {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
@@ -29,11 +27,11 @@ const TodoContainer = ({ airtableName }) => {
       .then((data) => {
         data.records.sort((objectA, objectB) => {
           if (objectA.fields.Title < objectB.fields.Title) {
-            return 1;
+            return -1;
           } else if (objectA.fields.Title === objectB.fields.Title) {
             return 0;
           } else {
-            return -1;
+            return 1;
           }
         });
         setTodoList(data.records);
