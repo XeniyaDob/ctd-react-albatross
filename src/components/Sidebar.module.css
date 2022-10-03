@@ -1,6 +1,6 @@
 .sidebarContainer {
+  padding-top: 80px;
   background-color: #327b76;
-  height: 100vh;
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
