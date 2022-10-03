@@ -8,6 +8,22 @@ const TodoContainer = ({ airtableName }) => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const sortedTitles = (a, b) => {
+    const objectA = a.fields.Title.toLowerCase();
+    const objectB = b.fields.Title.toLowerCase();
+
+    if (objectA < objectB) {
+      return -1;
+    } else if (objectA === objectB) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
+
+  const sortByTitle = () => {
+    setTodoList([...todoList.sort(sortedTitles)]);
+  };
   React.useEffect(() => {
     //starts the fetching, which is the endpoint
     fetch(
@@ -25,15 +41,7 @@ const TodoContainer = ({ airtableName }) => {
       //API sends the data in text format and to use it we need to convert back into an Object
       .then((response) => response.json())
       .then((data) => {
-        data.records.sort((objectA, objectB) => {
-          if (objectA.fields.Title < objectB.fields.Title) {
-            return -1;
-          } else if (objectA.fields.Title === objectB.fields.Title) {
-            return 0;
-          } else {
-            return 1;
-          }
-        });
+        data.records.sort(sortedTitles);
         setTodoList(data.records);
         setIsLoading(false);
       })
@@ -124,6 +132,7 @@ const TodoContainer = ({ airtableName }) => {
           todoList={todoList}
           onRemoveTodo={removeTodo}
           onComplete={handleToggleComplete}
+          sortByTitle={sortByTitle}
         />
       )}
     </div>
