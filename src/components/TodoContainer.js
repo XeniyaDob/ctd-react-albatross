@@ -11,7 +11,7 @@ const TodoContainer = ({ airtableName }) => {
   const sortedTitles = (a, b) => {
     const objectA = a.fields.Title.toLowerCase();
     const objectB = b.fields.Title.toLowerCase();
-
+    //toLowerCase()
     if (objectA < objectB) {
       return -1;
     } else if (objectA === objectB) {
@@ -82,16 +82,50 @@ const TodoContainer = ({ airtableName }) => {
       });
   };
 
+  const updateTodo = (id, newTitle) => {
+    console.log("ID,Title", id, newTitle);
+    fetch(
+      `https://api.airtable.com/v0/${
+        process.env.REACT_APP_AIRTABLE_BASE_ID
+      }/${encodeURIComponent(airtableName)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          records: [
+            {
+              id,
+              fields: {
+                Title: newTitle,
+              },
+            },
+          ],
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then(() => {
+        //console.log("Title", id);
+        const updatedTodoList = JSON.parse(JSON.stringify(todoList));
+        //console.log("UpdatedTodolist", updatedTodoList);
+        const updatedItem = updatedTodoList.find((item) => item.id === id);
+        updatedItem.fields.Title = newTitle;
+        setTodoList(updatedTodoList);
+      });
+  };
+
   const handleToggleComplete = (id) => {
-    console.log(id);
     const newTodoList = todoList.map((todo) => {
       if (todo.id === id) {
-        const updatedItem = {
+        const completedItem = {
           ...todo,
           isComplete: !todo.isComplete,
         };
 
-        return updatedItem;
+        return completedItem;
       }
 
       return todo;
@@ -130,6 +164,7 @@ const TodoContainer = ({ airtableName }) => {
       ) : (
         <TodoList
           todoList={todoList}
+          onChange={updateTodo}
           onRemoveTodo={removeTodo}
           onComplete={handleToggleComplete}
           sortByTitle={sortByTitle}

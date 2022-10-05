@@ -4,7 +4,7 @@ import styles from "./InputWithLabel.module.css";
 import PropTypes from "prop-types";
 
 const AddTodoForm = ({ onAddTodo }) => {
-  const [todoTitle, setTodoTitle] = useState([]);
+  const [todoTitle, setTodoTitle] = useState("");
   const handleTitleChange = (event) => {
     const newTodo = event.target.value;
     setTodoTitle(newTodo);

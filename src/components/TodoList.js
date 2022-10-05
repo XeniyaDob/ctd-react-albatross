@@ -11,7 +11,13 @@ const SORTS = {
   ID: (todoList) => sortBy(todoList, "id").reverse(),
 };
 
-const TodoList = ({ todoList, onRemoveTodo, onComplete, sortByTitle }) => {
+const TodoList = ({
+  todoList,
+  onRemoveTodo,
+  onComplete,
+  sortByTitle,
+  onChange,
+}) => {
   const [sort, setSort] = useState({
     sortKey: "NONE",
     isReverse: false,
@@ -41,6 +47,7 @@ const TodoList = ({ todoList, onRemoveTodo, onComplete, sortByTitle }) => {
             todo={todo}
             onRemoveTodo={onRemoveTodo}
             onComplete={onComplete}
+            onChange={onChange}
           />
         ))}
       </ul>
