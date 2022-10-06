@@ -83,7 +83,7 @@ const TodoContainer = ({ airtableName }) => {
   };
 
   const updateTodo = (id, newTitle) => {
-    console.log("ID,Title", id, newTitle);
+    //console.log("ID,Title", id, newTitle);
     fetch(
       `https://api.airtable.com/v0/${
         process.env.REACT_APP_AIRTABLE_BASE_ID

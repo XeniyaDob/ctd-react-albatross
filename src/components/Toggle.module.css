@@ -36,7 +36,7 @@
 
 .switchToggle input[type="checkbox"] + label::before {
   position: absolute;
-  content: "ask";
+  content: "A-Z";
   font-size: 13px;
   text-align: center;
   line-height: 25px;
@@ -53,7 +53,7 @@
 
 .switchToggle input[type="checkbox"]:checked + label::before {
   left: 50%;
-  content: "desk";
+  content: "Z-A";
   color: #fff;
   background-color: #327b76;
   box-shadow: -3px -3px 5px rgba(255, 255, 255, 0.5), 3px 3px 5px #327b76;
