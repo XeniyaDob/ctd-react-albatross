@@ -8,6 +8,22 @@ const TodoContainer = ({ airtableName }) => {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const sortedTitles = (a, b) => {
+    const objectA = a.fields.Title.toLowerCase();
+    const objectB = b.fields.Title.toLowerCase();
+    //toLowerCase()
+    if (objectA < objectB) {
+      return -1;
+    } else if (objectA === objectB) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
+
+  const sortByTitle = () => {
+    setTodoList([...todoList.sort(sortedTitles)]);
+  };
   React.useEffect(() => {
     //starts the fetching, which is the endpoint
     fetch(
@@ -25,15 +41,7 @@ const TodoContainer = ({ airtableName }) => {
       //API sends the data in text format and to use it we need to convert back into an Object
       .then((response) => response.json())
       .then((data) => {
-        data.records.sort((objectA, objectB) => {
-          if (objectA.fields.Title < objectB.fields.Title) {
-            return -1;
-          } else if (objectA.fields.Title === objectB.fields.Title) {
-            return 0;
-          } else {
-            return 1;
-          }
-        });
+        data.records.sort(sortedTitles);
         setTodoList(data.records);
         setIsLoading(false);
       })
@@ -74,16 +82,50 @@ const TodoContainer = ({ airtableName }) => {
       });
   };
 
+  const updateTodo = (id, newTitle) => {
+    //console.log("ID,Title", id, newTitle);
+    fetch(
+      `https://api.airtable.com/v0/${
+        process.env.REACT_APP_AIRTABLE_BASE_ID
+      }/${encodeURIComponent(airtableName)}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_AIRTABLE_API_KEY}`,
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          records: [
+            {
+              id,
+              fields: {
+                Title: newTitle,
+              },
+            },
+          ],
+        }),
+      }
+    )
+      .then((response) => response.json())
+      .then(() => {
+        //console.log("Title", id);
+        const updatedTodoList = JSON.parse(JSON.stringify(todoList));
+        //console.log("UpdatedTodolist", updatedTodoList);
+        const updatedItem = updatedTodoList.find((item) => item.id === id);
+        updatedItem.fields.Title = newTitle;
+        setTodoList(updatedTodoList);
+      });
+  };
+
   const handleToggleComplete = (id) => {
-    console.log(id);
     const newTodoList = todoList.map((todo) => {
       if (todo.id === id) {
-        const updatedItem = {
+        const completedItem = {
           ...todo,
           isComplete: !todo.isComplete,
         };
 
-        return updatedItem;
+        return completedItem;
       }
 
       return todo;
@@ -122,8 +164,10 @@ const TodoContainer = ({ airtableName }) => {
       ) : (
         <TodoList
           todoList={todoList}
+          onChange={updateTodo}
           onRemoveTodo={removeTodo}
           onComplete={handleToggleComplete}
+          sortByTitle={sortByTitle}
         />
       )}
     </div>

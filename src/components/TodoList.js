@@ -3,6 +3,7 @@ import TodoListItem from "./TodoListItem";
 import PropTypes from "prop-types";
 import { sortBy } from "lodash";
 import { Toggle } from "./Toggle.js";
+import styles from "./Toggle.module.css";
 
 const SORTS = {
   NONE: (todoList) => todoList,
@@ -10,7 +11,13 @@ const SORTS = {
   ID: (todoList) => sortBy(todoList, "id").reverse(),
 };
 
-const TodoList = ({ todoList, onRemoveTodo, onComplete }) => {
+const TodoList = ({
+  todoList,
+  onRemoveTodo,
+  onComplete,
+  sortByTitle,
+  onChange,
+}) => {
   const [sort, setSort] = useState({
     sortKey: "NONE",
     isReverse: false,
@@ -27,9 +34,12 @@ const TodoList = ({ todoList, onRemoveTodo, onComplete }) => {
     : sortFunction(todoList);
   return (
     <>
-      <span>
+      <div className={styles.switchSort}>
         <Toggle onChange={() => handleSort("TITLE")} />
-      </span>
+        <button className={styles.sortButton} onClick={sortByTitle}>
+          Sort
+        </button>
+      </div>
       <ul>
         {sortedList.map((todo) => (
           <TodoListItem
@@ -37,6 +47,7 @@ const TodoList = ({ todoList, onRemoveTodo, onComplete }) => {
             todo={todo}
             onRemoveTodo={onRemoveTodo}
             onComplete={onComplete}
+            onChange={onChange}
           />
         ))}
       </ul>

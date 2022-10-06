@@ -4,7 +4,7 @@ import styles from "./InputWithLabel.module.css";
 import PropTypes from "prop-types";
 
 const AddTodoForm = ({ onAddTodo }) => {
-  const [todoTitle, setTodoTitle] = useState([]);
+  const [todoTitle, setTodoTitle] = useState("");
   const handleTitleChange = (event) => {
     const newTodo = event.target.value;
     setTodoTitle(newTodo);
@@ -12,9 +12,14 @@ const AddTodoForm = ({ onAddTodo }) => {
 
   const handleAddTodo = (event) => {
     event.preventDefault();
-
-    onAddTodo({ fields: { Title: todoTitle } });
-    setTodoTitle("");
+    //Prevent from spaces
+    const inputSpaces = todoTitle.trim();
+    if (inputSpaces === "") {
+      console.log("spaces from User");
+    } else {
+      onAddTodo({ fields: { Title: todoTitle } });
+      setTodoTitle("");
+    }
   };
 
   return (
