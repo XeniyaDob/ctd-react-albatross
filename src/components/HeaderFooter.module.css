@@ -56,14 +56,28 @@
 .footer {
   position: fixed;
   display: flex;
+  align-items: center;
   justify-content: flex-start;
   left: 0;
   bottom: 0;
+  padding: 30px 50px;
   width: 100%;
   background-color: rgb(210, 210, 210);
-  padding: 30px 50px;
-
   color: white;
+}
+p {
+  margin: 1rem;
+  font-size: 1.3rem;
+}
+
+a {
+  color: white;
+  margin: 1rem;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+a:hover {
+  color: orange;
 }
 @media (max-width: 600px) {
 }

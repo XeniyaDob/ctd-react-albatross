@@ -7,25 +7,25 @@ import styles from "./Sidebar.module.css";
 export const SideBarData = [
   {
     title: "Home",
-    path: "/",
+    path: "todo/home",
     icon: <AiIcons.AiOutlineHome />,
     className: styles.navText,
   },
   {
     title: "Work",
-    path: "/work",
+    path: "todo/work",
     icon: <FaIcons.FaReact />,
     className: styles.navText,
   },
   {
     title: "Goals",
-    path: "/goals",
+    path: "todo/goals",
     icon: <RiIcons.RiFundsLine />,
     className: styles.navText,
   },
   {
     title: "Personal",
-    path: "/personal",
+    path: "todo/personal",
     icon: <FaIcons.FaAngellist />,
     className: styles.navText,
   },
