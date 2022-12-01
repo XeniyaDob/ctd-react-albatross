@@ -12,8 +12,9 @@ body {
 .container {
   display: flex;
   color: #171212;
-  background-color: rgb(235, 235, 235);
-  margin-top: 120px;
+  background-color: rgb(255, 254, 254);
+  margin: 120px 0;
+  height: 100vh;
 }
 .todoContainer {
   display: flex;
@@ -23,7 +24,6 @@ body {
   margin: 10px 100px;
   padding: 10px 100px;
   padding-top: 2%;
-  height: 120vh;
 }
 /* ================================= 
  Media Query for Mobile Devices
@@ -36,7 +36,7 @@ body {
     align-items: center;
     margin: 0;
     padding: 0 10px;
-    background-color: rgb(235, 235, 235);
+    background-color: rgb(255, 255, 255);
   }
 }
 

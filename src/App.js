@@ -12,12 +12,11 @@ const App = () => {
       <Header />
       <div className={styles.container}>
         <Sidebar />
-
         <Routes>
           <Route
             index
             exact
-            path="/"
+            path="todo/home"
             element={
               <>
                 <TodoContainer airtableName="Home" />
@@ -27,7 +26,7 @@ const App = () => {
           <Route
             index
             exact
-            path="/work"
+            path="todo/work"
             element={
               <>
                 <TodoContainer airtableName="Work" />
@@ -37,7 +36,7 @@ const App = () => {
           <Route
             index
             exact
-            path="/goals"
+            path="todo/goals"
             element={
               <>
                 <TodoContainer airtableName="Goals" />
@@ -47,7 +46,7 @@ const App = () => {
           <Route
             index
             exact
-            path="/personal"
+            path="todo/personal"
             element={
               <>
                 <TodoContainer airtableName="Personal" />
