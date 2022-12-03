@@ -13,7 +13,7 @@ body {
   display: flex;
   color: #171212;
   background-color: rgb(255, 254, 254);
-  margin: 120px 0;
+  margin: 120px 0 0 0;
   height: 100vh;
 }
 .todoContainer {
@@ -22,14 +22,41 @@ body {
   justify-content: flex-start;
   align-items: center;
   margin: 10px 100px;
-  padding: 10px 100px;
+  padding: 10px 100px 120px 100px;
   padding-top: 2%;
+}
+.description {
+  max-width: 50%;
+  list-style-type: circle;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.inputButton {
+  max-width: 170px;
+  margin: 20px;
+  color: #090909;
+  padding: 0.7em 1.7em;
+  font-size: 18px;
+  border-radius: 0.5em;
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s;
+  background-color: #327b76;
+  box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
+}
+
+.inputButton:hover {
+  border: 1px solid white;
+}
+
+.inputButton:active {
+  box-shadow: 6px 6px 12px #ffffff, -6px -6px 12px #c5c5c5;
 }
 /* ================================= 
  Media Query for Mobile Devices
 ==================================== */
 
-@media only screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .todoContainer {
     display: flex;
     flex-direction: column;
@@ -38,11 +65,16 @@ body {
     padding: 0 10px;
     background-color: rgb(255, 255, 255);
   }
-}
-
-/* @media only screen and (max-width: 1024px) {
-  .todoContainer {
-    margin: 0;
-    padding: 0 10px;
+  .description {
+    max-width: 90%;
   }
-} */
+}
+/* ================================= 
+ Media Query for Tablets Devices
+==================================== */
+
+@media screen and (max-width: 992px) {
+  .description {
+    max-width: 90%;
+  }
+}

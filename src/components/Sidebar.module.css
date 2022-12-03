@@ -22,3 +22,12 @@
   background: #327b76;
   box-shadow: 9px 9px 25px #14312f, -9px -9px 25px #50c5bd;
 }
+/* ================================= 
+ Media Query for Mobile Devices
+==================================== */
+
+@media screen and (max-width: 600px) {
+  .sidebarContainer {
+    padding-top: 40px;
+  }
+}

@@ -79,5 +79,26 @@ a {
 a:hover {
   color: orange;
 }
+/* ================================= 
+ Media Query for Tablet Devices
+==================================== */
+@media (min-width: 992px) {
+  .footer {
+    padding: 10px 20px;
+  }
+}
+/* ================================= 
+ Media Query for Mobile Devices
+==================================== */
 @media (max-width: 600px) {
+  .header {
+    padding: 1.5rem;
+  }
+  .footer {
+    height: 8%;
+    padding: 0.2rem;
+  }
+  a {
+    font-size: 1rem;
+  }
 }

@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import styles from "./App.module.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Landing from "./components/Landing";
 
 const App = () => {
   return (
@@ -13,9 +14,8 @@ const App = () => {
       <div className={styles.container}>
         <Sidebar />
         <Routes>
+          <Route index exact path="/todo" element={<Landing />} />
           <Route
-            index
-            exact
             path="todo/home"
             element={
               <>
@@ -24,8 +24,6 @@ const App = () => {
             }
           />
           <Route
-            index
-            exact
             path="todo/work"
             element={
               <>
@@ -34,8 +32,6 @@ const App = () => {
             }
           />
           <Route
-            index
-            exact
             path="todo/goals"
             element={
               <>
@@ -44,8 +40,6 @@ const App = () => {
             }
           />{" "}
           <Route
-            index
-            exact
             path="todo/personal"
             element={
               <>

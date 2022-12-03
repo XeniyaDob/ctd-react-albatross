@@ -3,6 +3,7 @@ import styles from "./HeaderFooter.module.css";
 import { BsLinkedin } from "react-icons/bs";
 import { FaGithubSquare } from "react-icons/fa";
 import { BsFillFileEarmarkPersonFill } from "react-icons/bs";
+import { NavLink } from "react-router-dom";
 
 function Footer() {
   const today = new Date();
@@ -11,8 +12,7 @@ function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <p>TODOAPP &copy;{thisYear}</p>
-
+      <NavLink to="/todo/">TODOAPP &copy;{thisYear}</NavLink>
       <a href="https://codethedream.org/" target="_blank">
         CTD project
       </a>
